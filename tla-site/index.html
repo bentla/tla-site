@@ -923,9 +923,8 @@ window.dataLayer=window.dataLayer||[];
 window.gtag=window.gtag||function(){dataLayer.push(arguments);};
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
 gtag('js',new Date());
-gtag('config',GA_ID,{anonymize_ip:true});
 var loaded=false;
-function loadGA(){if(loaded)return;loaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);}
+function loadGA(){if(loaded)return;loaded=true;gtag('config',GA_ID,{anonymize_ip:true});var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);}
 function getChoice(){try{return localStorage.getItem('tla_consent');}catch(e){return null;}}
 window.__tlaConsent={
 get:getChoice,
