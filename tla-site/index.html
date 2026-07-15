@@ -1237,7 +1237,7 @@ section.block{padding:46px 0;position:relative}
         <li><span class="pr-ck"><svg width="15" height="15"><use href="#i-check"/></svg></span>Bonus préparation physique</li>
         <li><span class="pr-ck"><svg width="15" height="15"><use href="#i-check"/></svg></span>Accès immédiat dès le 1er versement</li>
       </ul>
-      <a class="pr-btn" href="https://buy.stripe.com/00weVe5Fq17t109cdj7kc04" target="_blank" rel="noopener">Je commence maintenant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      <a class="pr-btn" href="https://buy.stripe.com/00weVe5Fq17t109cdj7kc04" data-payment-cta="pricing" target="_blank" rel="noopener">Je commence maintenant <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
 </section>
@@ -1260,15 +1260,54 @@ section.block{padding:46px 0;position:relative}
 </main>
 
 <div class="foot">
-  <div class="wrap"><div class="stamp">Train Like Athlete. Tous droits réservés 2025.<br/><a href="#">Mentions légales</a> · <a href="#">CGV</a> · <a href="#">Confidentialité</a></div></div>
+  <div class="wrap"><div class="stamp">Train Like Athlete. Tous droits réservés 2026.<br/><a href="https://www.trainlikeathlete.fr/mentions-l%C3%A9gales">Mentions légales</a> · <a href="https://www.trainlikeathlete.fr/cgv">CGV</a> · <a href="https://www.trainlikeathlete.fr/confidentialite">Confidentialité</a></div></div>
 </div>
 
 <!-- ================= STICKY CTA ================= -->
 <div class="sticky-cta" id="stickyCta">
-  <a href="https://buy.stripe.com/00weVe5Fq17t109cdj7kc04" target="_blank" rel="noopener" class="btn btn-p">Je rejoins la Méthode TLA →</a>
+  <a href="https://buy.stripe.com/00weVe5Fq17t109cdj7kc04" data-payment-cta="sticky" target="_blank" rel="noopener" class="btn btn-p">Je rejoins la Méthode TLA →</a>
 </div>
 
 <script>
+// Attribution Stripe : conserve la campagne d'entrée et distingue chaque CTA.
+// Les paramètres sont visibles dans Stripe et reviennent sur l'URL de confirmation
+// lorsque le Payment Link utilise une redirection après paiement.
+(function(){
+  var allowed=['utm_source','utm_medium','utm_campaign','utm_term'];
+  var incoming=new URLSearchParams(window.location.search);
+  var safe=function(value,max){
+    value=(value||'').trim().replace(/[^a-zA-Z0-9_-]+/g,'_').replace(/^_+|_+$/g,'');
+    return value.slice(0,max||150);
+  };
+  var referrer='';
+  try{referrer=document.referrer?new URL(document.referrer).hostname.replace(/^www\./,''):'';}catch(e){}
+  var defaults={
+    utm_source:safe(referrer)||'direct',
+    utm_medium:referrer?'referral':'direct',
+    utm_campaign:'methode_tla'
+  };
+  var sessionRef='';
+  try{
+    sessionRef=sessionStorage.getItem('tla_payment_ref')||'';
+    if(!sessionRef){
+      var random=new Uint32Array(1);crypto.getRandomValues(random);
+      sessionRef='tla_'+Date.now().toString(36)+'_'+random[0].toString(36);
+      sessionStorage.setItem('tla_payment_ref',sessionRef);
+    }
+  }catch(e){sessionRef='tla_'+Date.now().toString(36);}
+
+  document.querySelectorAll('a[data-payment-cta]').forEach(function(link){
+    var url=new URL(link.href);
+    allowed.forEach(function(key){
+      var value=safe(incoming.get(key))||defaults[key];
+      if(value)url.searchParams.set(key,value);
+    });
+    url.searchParams.set('utm_content',safe(link.getAttribute('data-payment-cta'))||'cta');
+    url.searchParams.set('client_reference_id',sessionRef);
+    link.href=url.toString();
+  });
+})();
+
 // reveal au scroll
 (function(){
   var els=document.querySelectorAll('.reveal');
