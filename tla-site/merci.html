@@ -31,6 +31,39 @@
     .secondary{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--cream)}
     .help{margin-top:22px;color:#777084;font-size:12px;line-height:1.5}
   </style>
+  <!-- GA4 + Google Consent Mode v2 : analytics refuse par defaut, charge uniquement apres consentement -->
+  <script>
+  (function(){
+  var GA_ID='G-X5Y7K0NCTT';
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=window.gtag||function(){dataLayer.push(arguments);};
+  gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied'});
+  gtag('js',new Date());
+  gtag('config',GA_ID,{anonymize_ip:true});
+  var loaded=false;
+  function loadGA(){if(loaded)return;loaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);}
+  function getChoice(){try{return localStorage.getItem('tla_consent');}catch(e){return null;}}
+  window.__tlaConsent={
+  get:getChoice,
+  apply:function(choice,save){
+  if(save!==false){try{localStorage.setItem('tla_consent',choice);}catch(e){}}
+  if(choice==='granted'){gtag('consent','update',{analytics_storage:'granted'});loadGA();}
+  }
+  };
+  window.tlaTrack=function(name,params){if(getChoice()==='granted'){gtag('event',name,params||{});}};
+  if(getChoice()==='granted'){window.__tlaConsent.apply('granted',false);}
+  })();
+  </script>
+  <style>
+  .tla-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;margin:0 auto;max-width:560px;background:rgba(21,20,25,.97);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px 20px;box-shadow:0 18px 50px rgba(0,0,0,.55);font-family:Archivo,sans-serif;color:#f2efe9;text-align:left}
+  .tla-consent p{margin:0 0 14px;font-size:13px;line-height:1.55;color:#b9b3c9}
+  .tla-consent-actions{display:flex;gap:10px}
+  .tla-consent-actions button{flex:1;min-height:44px;border-radius:10px;font:700 14px Archivo,sans-serif;cursor:pointer;transition:transform .15s ease}
+  .tla-consent-actions button:hover{transform:translateY(-1px)}
+  .tla-consent-accept{border:0;background:linear-gradient(145deg,#8a6bff,#6e4af0);color:#fff}
+  .tla-consent-decline{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#f2efe9}
+  @media(max-width:480px){.tla-consent{left:10px;right:10px;bottom:10px}}
+  </style>
 </head>
 <body>
   <main>
@@ -52,5 +85,25 @@
       <p class="help">Besoin d’aide ? Écris à contact@trainlikeathlete.fr</p>
     </section>
   </main>
+  <!-- Bandeau de consentement + evenements GA4 -->
+  <div class="tla-consent" id="tlaConsent" hidden role="dialog" aria-label="Consentement mesure d'audience">
+  <p>Pour ameliorer la Methode TLA, on mesure l'audience du site avec Google Analytics. Aucune donnee personnelle n'est collectee. Tu peux accepter ou refuser librement.</p>
+  <div class="tla-consent-actions">
+  <button type="button" class="tla-consent-accept" id="tlaConsentAccept">Accepter</button>
+  <button type="button" class="tla-consent-decline" id="tlaConsentDecline">Refuser</button>
+  </div>
+  </div>
+  <script>
+  (function(){
+  var bar=document.getElementById('tlaConsent');if(!bar)return;
+  function choose(choice){window.__tlaConsent.apply(choice);bar.hidden=true;}
+  document.getElementById('tlaConsentAccept').addEventListener('click',function(){choose('granted');});
+  document.getElementById('tlaConsentDecline').addEventListener('click',function(){choose('denied');});
+  if(!window.__tlaConsent.get()){bar.hidden=false;}
+  // whatsapp_click / email_click sur la page de confirmation
+  document.querySelectorAll('a[href^="https://wa.me"]').forEach(function(a){a.addEventListener('click',function(){window.tlaTrack('whatsapp_click');});});
+  document.querySelectorAll('a[href^="mailto:"]').forEach(function(a){a.addEventListener('click',function(){window.tlaTrack('email_click');});});
+  })();
+  </script>
 </body>
 </html>
