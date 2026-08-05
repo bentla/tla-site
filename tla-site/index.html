@@ -86,11 +86,11 @@ header{position:sticky;top:0;z-index:80;
   border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;max-width:1000px;margin:0 auto;padding:12px 20px}
 @media(min-width:760px){.nav{padding:14px 40px}}
-.brand{display:flex;align-items:center;gap:10px}
-.brand .m{width:36px;height:36px;border-radius:11px;overflow:hidden;flex:none;background:#fff;
-  box-shadow:0 0 20px rgba(91,52,230,.35), inset 0 0 0 1px var(--glass-br)}
-.brand .m img{width:100%;height:100%;object-fit:cover}
-.brand .w{font-family:'Archivo';font-weight:700;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--cream)}
+.brand{display:flex;align-items:center;gap:13px}
+.brand img{width:64px;flex:none;filter:drop-shadow(0 0 14px rgba(138,107,255,.45))}
+.brand .w{font-family:'Archivo';font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--cream);padding-left:13px;border-left:1px solid var(--line)}
+@media(max-width:420px){.brand .w{display:none}}
 /* hamburger */
 .burger{width:42px;height:42px;border-radius:12px;flex:none;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:5px;cursor:pointer;
@@ -990,7 +990,7 @@ if(getChoice()==='granted'){window.__tlaConsent.apply('granted',false);}
 <!-- ================= HEADER ================= -->
 <header>
   <div class="nav">
-    <a class="brand" href="#top"><span class="m"><img src="logo-tla.png" alt="TLA"/></span><span class="w">TRAIN LIKE ATHLETE</span></a>
+    <a class="brand" href="https://www.trainlikeathlete.fr" aria-label="Accueil Train Like Athlete"><img src="tla_logo_mark.svg" alt="Train Like Athlete"/><span class="w">TRAIN LIKE ATHLETE</span></a>
     <a class="contact-btn" href="mailto:contact@trainlikeathlete.fr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contacter</a>
   </div>
 </header>

@@ -274,7 +274,7 @@ form.off{display:none}
 
 <header>
   <div class="nav">
-    <a class="brand" href="#top"><img src="tla_logo_mark.svg" alt="Train Like Athlete"/><span class="w">Train Like Athlete</span></a>
+    <a class="brand" href="https://www.trainlikeathlete.fr" aria-label="Accueil Train Like Athlete"><img src="tla_logo_mark.svg" alt="Train Like Athlete"/><span class="w">Train Like Athlete</span></a>
     <a class="nav-cta" href="#recevoir">Recevoir le guide</a>
   </div>
 </header>
@@ -582,11 +582,28 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     (safe(p.get('utm_campaign'))||'guide_sec_8_semaines');
 })();
 
-/* ---------- formulaire (Netlify Forms) ---------- */
+/* ---------- formulaire (Netlify Forms + webhook Make -> Airtable) ---------- */
 (function(){
+  var WEBHOOK='https://hook.eu2.make.com/ps2zntdydaouur3b0tmo3x8vjgq2uydk';
+
   var form=document.getElementById('guideForm'),
       btn=document.getElementById('guideSubmit'),
       done=document.getElementById('guideDone');
+
+  // Envoi vers Make (Airtable « contact TLA »).
+  // Volontairement non bloquant : si Make est indisponible, le visiteur
+  // recoit quand meme son PDF et le lead reste enregistre dans Netlify.
+  function versAirtable(d){
+    try{
+      var corps=JSON.stringify(d);
+      if(navigator.sendBeacon){
+        navigator.sendBeacon(WEBHOOK, new Blob([corps],{type:'application/json'}));
+        return;
+      }
+      fetch(WEBHOOK,{method:'POST',mode:'no-cors',keepalive:true,
+        headers:{'Content-Type':'application/json'},body:corps}).catch(function(){});
+    }catch(e){ /* on n'interrompt jamais le parcours du visiteur */ }
+  }
 
   function check(i){
     var f=i.closest('.field'), ok=i.value.trim().length>0;
@@ -607,6 +624,16 @@ document.querySelectorAll('.faq-q').forEach(function(q){
     }
     var prenom=form.prenom.value.trim();
     btn.disabled=true; btn.textContent='Envoi…';
+
+    versAirtable({
+      prenom: prenom,
+      nom:    form.nom.value.trim(),
+      email:  form.email.value.trim().toLowerCase(),
+      source: form.source.value,
+      origine:'guide-sec-8-semaines',
+      page:   location.href,
+      date:   new Date().toISOString()
+    });
 
     fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
       body:new URLSearchParams(new FormData(form)).toString()})
