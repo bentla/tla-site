@@ -124,16 +124,11 @@ section.block{padding:52px 0;position:relative}
   opacity:.5;filter:saturate(.85)}
 .hero-visual::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(6,5,7,.35),rgba(6,5,7,.85))}
-.book{position:relative;z-index:2;width:min(60vw,210px);aspect-ratio:1/1.42;border-radius:4px 12px 12px 4px;
-  background:radial-gradient(120% 90% at 18% 0%,rgba(138,107,255,.5),rgba(91,52,230,0) 56%),
-    linear-gradient(160deg,#1c1233,#0b0913 60%,#060507);
-  border:1px solid var(--line-v);padding:20px 16px;display:flex;flex-direction:column;justify-content:space-between;
+.book{position:relative;z-index:2;width:min(58vw,214px);border-radius:3px 10px 10px 3px;overflow:hidden;
+  border:1px solid var(--line-v);
   box-shadow:24px 30px 60px -22px rgba(0,0,0,.95), 0 0 70px -20px rgba(91,52,230,.75);
   transform:rotate(-3deg)}
-.book .t{font-family:'Space Mono';font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:var(--violet-br);font-weight:700}
-.book .n{font-weight:800;font-size:24px;line-height:.98;letter-spacing:-1px;text-transform:uppercase;color:#fff}
-.book .n em{font-style:normal;display:block;color:var(--violet-br)}
-.book .b{font-family:'Space Mono';font-size:7px;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted)}
+.book img{width:100%;display:block}
 .hero-badge{position:absolute;z-index:3;bottom:22px;left:50%;transform:translateX(-50%);
   font-family:'Space Mono';font-size:10px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;
   background:linear-gradient(150deg,#6e4af0,#5b34e6);color:#fff;padding:8px 18px;border-radius:100px;white-space:nowrap;
@@ -291,9 +286,7 @@ form.off{display:none}
     <div class="hero-visual reveal in">
       <img class="bg" src="win-banner.jpg" alt=""/>
       <div class="book">
-        <div class="t">Coach Ben · TLA</div>
-        <div class="n">Sec en<em>8 semaines</em></div>
-        <div class="b">Nutrition &amp; circuit training</div>
+        <img src="guide-couverture.jpg" alt="Couverture du guide Sec en 8 semaines"/>
       </div>
       <span class="hero-badge">100 % gratuit</span>
     </div>
