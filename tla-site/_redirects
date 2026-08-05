@@ -5,3 +5,11 @@
 /email   /?utm_source=email&utm_medium=email&utm_campaign=methode-tla          302
 /wa      /?utm_source=whatsapp&utm_medium=chat&utm_campaign=methode-tla        302
 /merci   /merci.html   200
+
+# ---- Guide gratuit « Sec en 8 semaines » ----
+/guide         /guide.html   200
+/guide-ig      /guide.html?utm_source=instagram&utm_medium=bio&utm_campaign=guide-sec        302
+/guide-story   /guide.html?utm_source=instagram&utm_medium=story&utm_campaign=guide-sec      302
+/guide-yt      /guide.html?utm_source=youtube&utm_medium=description&utm_campaign=guide-sec  302
+/guide-wa      /guide.html?utm_source=whatsapp&utm_medium=chat&utm_campaign=guide-sec        302
+/guide-email   /guide.html?utm_source=email&utm_medium=email&utm_campaign=guide-sec          302
