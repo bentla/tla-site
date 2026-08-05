@@ -13,3 +13,12 @@
 /guide-yt      /guide.html?utm_source=youtube&utm_medium=description&utm_campaign=guide-sec  302
 /guide-wa      /guide.html?utm_source=whatsapp&utm_medium=chat&utm_campaign=guide-sec        302
 /guide-email   /guide.html?utm_source=email&utm_medium=email&utm_campaign=guide-sec          302
+
+# ---- Page de vente TLA 360 ----
+/programme       /programme.html   200
+/tla360          /programme.html   200
+/programme-ig    /programme.html?utm_source=instagram&utm_medium=bio&utm_campaign=tla360        302
+/programme-story /programme.html?utm_source=instagram&utm_medium=story&utm_campaign=tla360      302
+/programme-yt    /programme.html?utm_source=youtube&utm_medium=description&utm_campaign=tla360  302
+/programme-wa    /programme.html?utm_source=whatsapp&utm_medium=chat&utm_campaign=tla360        302
+/programme-email /programme.html?utm_source=email&utm_medium=email&utm_campaign=tla360          302
