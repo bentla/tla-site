@@ -590,19 +590,23 @@ document.querySelectorAll('.faq-q').forEach(function(q){
       btn=document.getElementById('guideSubmit'),
       done=document.getElementById('guideDone');
 
-  // Envoi vers Make (Airtable « contact TLA »).
-  // Volontairement non bloquant : si Make est indisponible, le visiteur
-  // recoit quand meme son PDF et le lead reste enregistre dans Netlify.
+  // 1) Capture principale : webhook Make -> base Airtable « contact TLA ».
   function versAirtable(d){
-    try{
-      var corps=JSON.stringify(d);
-      if(navigator.sendBeacon){
-        navigator.sendBeacon(WEBHOOK, new Blob([corps],{type:'application/json'}));
-        return;
-      }
-      fetch(WEBHOOK,{method:'POST',mode:'no-cors',keepalive:true,
-        headers:{'Content-Type':'application/json'},body:corps}).catch(function(){});
-    }catch(e){ /* on n'interrompt jamais le parcours du visiteur */ }
+    var corps=JSON.stringify(d);
+    return fetch(WEBHOOK,{method:'POST',keepalive:true,
+      headers:{'Content-Type':'application/json'},body:corps})
+      .catch(function(){
+        // filet : sendBeacon passe meme si le reseau se coupe ou si l'onglet se ferme
+        try{ navigator.sendBeacon && navigator.sendBeacon(WEBHOOK, new Blob([corps],{type:'application/json'})); }catch(e){}
+      });
+  }
+
+  // 2) Sauvegarde secondaire : Netlify Forms.
+  // Ne fonctionne que si la detection de formulaires est activee sur le site.
+  // On ignore volontairement l'echec : il ne doit jamais empecher le telechargement.
+  function versNetlify(){
+    return fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:new URLSearchParams(new FormData(form)).toString()}).catch(function(){});
   }
 
   function check(i){
@@ -633,23 +637,15 @@ document.querySelectorAll('.faq-q').forEach(function(q){
       origine:'guide-sec-8-semaines',
       page:   location.href,
       date:   new Date().toISOString()
-    });
-
-    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams(new FormData(form)).toString()})
-    .then(function(r){
-      if(!r.ok) throw new Error('HTTP '+r.status);
+    })
+    .then(versNetlify)   // sauvegarde, son echec est sans consequence
+    .finally(function(){
+      // Le visiteur obtient son guide dans tous les cas : le lead est deja parti dans Airtable.
       document.getElementById('donePrenom').textContent=prenom;
       form.classList.add('off'); done.classList.add('on');
       done.scrollIntoView({block:'center',behavior:'smooth'});
       if(window.tlaTrack) window.tlaTrack('lead_guide');
-      // on lance aussi le téléchargement automatiquement
       setTimeout(function(){ document.getElementById('dlBtn').click(); }, 600);
-    })
-    .catch(function(err){
-      console.error(err);
-      btn.disabled=false; btn.textContent='Réessayer';
-      alert("L'envoi a échoué. Vérifie ta connexion et réessaie.");
     });
   });
 })();
