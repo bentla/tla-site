@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 345" width="1200" height="345">
+  <title>TLA Train Like Athlete Vector Logo</title>
+  <desc>Clean vector version of a bold angular TLA sports logo.</desc>
+  <rect width="1200" height="345" fill="none"/>
+  <g fill="#ffffff" transform="translate(70 75)">
+    <!-- T -->
+    <polygon points="0,0 360,0 332,72 210,72 130,260 35,260 115,72 0,72"/>
+    <!-- L -->
+    <polygon points="390,0 495,0 405,188 625,188 595,260 295,260"/>
+    <!-- A custom angular -->
+    <path d="M720 260 L900 0 L1045 0 L1115 260 L1012 260 L1000 205 L835 205 L800 260 Z
+             M872 135 L982 135 L958 55 Z" fill-rule="evenodd"/>
+    <!-- lightning cut in A -->
+    <polygon points="942,62 895,154 958,154 912,238 1020,108 960,108" fill="#0D0D0D" opacity="1"/>
+  </g>
+</svg>

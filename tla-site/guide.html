@@ -62,11 +62,11 @@ header{position:sticky;top:0;z-index:80;background:rgba(6,5,7,.6);
   border-bottom:1px solid var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto;padding:12px 20px}
 @media(min-width:860px){.nav{padding:14px 40px}}
-.brand{display:flex;align-items:center;gap:10px}
-.brand .m{width:36px;height:36px;border-radius:11px;overflow:hidden;flex:none;background:#fff;
-  box-shadow:0 0 20px rgba(91,52,230,.35)}
-.brand .m img{width:100%;height:100%;object-fit:cover}
-.brand .w{font-weight:700;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--cream)}
+.brand{display:flex;align-items:center;gap:13px}
+.brand img{width:64px;flex:none;filter:drop-shadow(0 0 14px rgba(138,107,255,.45))}
+.brand .w{font-weight:700;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cream);
+  padding-left:13px;border-left:1px solid var(--line)}
+@media(max-width:420px){.brand .w{display:none}}
 .nav-cta{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13px;color:#fff;
   padding:9px 18px;border-radius:100px;background:linear-gradient(150deg,#6e4af0,#5b34e6);
   box-shadow:0 10px 26px -10px rgba(91,52,230,.8);transition:transform .2s var(--ease)}
@@ -263,7 +263,7 @@ form.off{display:none}
 
 <header>
   <div class="nav">
-    <a class="brand" href="#top"><span class="m"><img src="logo-tla.png" alt="TLA"/></span><span class="w">Train Like Athlete</span></a>
+    <a class="brand" href="#top"><img src="tla_logo_mark.svg" alt="Train Like Athlete"/><span class="w">Train Like Athlete</span></a>
     <a class="nav-cta" href="#recevoir">Recevoir le guide</a>
   </div>
 </header>
@@ -332,8 +332,8 @@ form.off{display:none}
 
         <div>
           <h3>Reçois-le maintenant</h3>
-          <p class="osub">Téléchargement immédiat, pas d'attente. Je t'envoie ensuite mes conseils
-          d'entraînement — désinscription en un clic.</p>
+          <p class="osub">Tu le télécharges tout de suite, il n'y a rien à attendre.
+          Je t'envoie ensuite mes conseils d'entraînement. Tu peux te désinscrire en un clic.</p>
         </div>
 
         <div class="row2">
@@ -359,8 +359,8 @@ form.off{display:none}
       <div class="done" id="guideDone" role="status" aria-live="polite">
         <div class="ok">✓</div>
         <h3>C'est bon <span id="donePrenom"></span></h3>
-        <p>Ton guide est prêt. Clique ci-dessous pour le télécharger — et garde-le,
-        tu vas y revenir chaque semaine.</p>
+        <p>Ton guide est prêt. Le téléchargement démarre tout seul.
+        S'il ne part pas, clique sur le bouton.</p>
         <a class="btn btn-p btn-lg" id="dlBtn" href="Guide-Sec-en-8-Semaines-TLA.pdf" download>Télécharger le PDF</a>
       </div>
     </div>
@@ -372,18 +372,17 @@ form.off{display:none}
 <!-- ================= CONTENU ================= -->
 <section class="block">
   <div class="shead reveal">
-    <div class="eyebrow">Ce qu'il y a dedans</div>
-    <h2 class="title">8 pages.<br/><span class="accent">Zéro blabla.</span></h2>
-    <p class="sub">Tout ce que tu dois savoir pour perdre le gras sans perdre ton muscle,
-    lu en 15 minutes, applicable dès demain matin.</p>
+    <div class="eyebrow">Le contenu</div>
+    <h2 class="title">8 pages,<br/><span class="accent">6 chapitres</span></h2>
+    <p class="sub">Tu le lis en 15 minutes. Tu peux appliquer dès ta prochaine séance.</p>
   </div>
 
   <div class="mods">
     <article class="mod glass reveal d1">
       <span class="n">01</span>
       <h3>Ton assiette, en 6 règles</h3>
-      <p>Pas de calories à compter, pas de balance. Six règles simples que tu appliques
-      à chaque repas — dont celle que personne ne respecte et qui change tout.</p>
+      <p>Six règles à appliquer à chaque repas. Pas de calories à compter,
+      pas de balance, pas de plats à peser.</p>
     </article>
     <article class="mod glass reveal d2">
       <span class="n">02</span>
@@ -411,9 +410,9 @@ form.off{display:none}
     </article>
     <article class="mod glass reveal d3">
       <span class="n">06</span>
-      <h3>Ce qui va vraiment se passer</h3>
-      <p>Semaine par semaine, y compris le ralentissement de la semaine 3 où la plupart
-      des gens abandonnent. Savoir qu'il arrive, c'est le passer.</p>
+      <h3>Ce qui va se passer</h3>
+      <p>Semaine par semaine, y compris le moment où ça ralentit et où beaucoup
+      de gens arrêtent. Tu sauras que c'est normal.</p>
     </article>
   </div>
 </section>
@@ -460,8 +459,8 @@ form.off{display:none}
 <!-- ================= CTA FINAL ================= -->
 <section class="block">
   <div class="final reveal">
-    <h2>Tu peux continuer<br/>à improviser.<span class="v">Ou suivre un plan.</span></h2>
-    <p>8 pages, 15 minutes de lecture, applicable dès ta prochaine séance. Gratuit.</p>
+    <h2>Prends le guide.<span class="v">Commence demain.</span></h2>
+    <p>8 pages, 15 minutes de lecture. C'est gratuit et tu peux t'y mettre tout de suite.</p>
     <a href="#recevoir" class="btn btn-p btn-lg" data-cta="final">Je reçois le guide →</a>
     <div class="trust">
       <span>Aucun spam</span><span>Téléchargement immédiat</span><span>Désinscription 1 clic</span>
