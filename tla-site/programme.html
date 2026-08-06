@@ -375,6 +375,22 @@ form.off{display:none}
 .contact-btn svg{width:16px;height:16px;color:var(--violet-br);stroke:currentColor;stroke-width:2;
   fill:none;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:520px){.contact-btn span{display:none}.contact-btn{padding:9px 12px}}
+
+/* ---------- encart paiement en plusieurs fois ---------- */
+.pr-paypal{display:flex;align-items:center;gap:11px;margin-top:14px;padding:12px 14px;
+  border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--glass-br);
+  font-size:13px;line-height:1.45;color:var(--soft)}
+.pr-paypal b{color:#fff;font-weight:700}
+.pr-paypal svg{width:20px;height:20px;flex:none;fill:var(--violet-br)}
+
+/* ---------- boutons plus compacts sur mobile ---------- */
+@media(max-width:620px){
+  .btn{padding:14px 20px;font-size:14.5px;border-radius:11px}
+  .btn-lg{padding:15px 22px;font-size:15px}
+  .sticky{padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+  .sticky .btn{padding:13px 18px;font-size:14.5px}
+  .nav-cta{font-size:12.5px;padding:8px 15px}
+}
 </style>
 </head>
 <body>
@@ -390,7 +406,7 @@ form.off{display:none}
         <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         <span>Contacter</span>
       </a>
-      <a class="nav-cta" href="#offre">Je commence</a>
+      <a class="nav-cta" href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" data-cta="nav">Je commence</a>
     </div>
   </div>
 </header>
@@ -411,7 +427,7 @@ form.off{display:none}
         <li><span class="ck">✓</span> En salle ou chez toi, avec ou sans matériel</li>
         <li><span class="ck">✓</span> Nutrition incluse et mon suivi pendant 8 semaines</li>
       </ul>
-      <a href="#offre" class="btn btn-p btn-lg" style="max-width:340px" data-cta="hero">Je commence maintenant →</a>
+      <a href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" class="btn btn-p btn-lg" style="max-width:340px" data-cta="hero">Je commence maintenant →</a>
     </div>
 
     <div class="hero-visual reveal in">
@@ -639,6 +655,10 @@ form.off{display:none}
         <li><span class="ck">✓</span> Accès immédiat dès le paiement</li>
       </ul>
       <a class="btn btn-p btn-lg" href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" data-cta="offre">Je commence maintenant →</a>
+      <div class="pr-paypal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21h3l1-5h3.5c3 0 5-1.8 5.5-4.7.3-2-.6-3.4-2.4-3.9.2-.4.3-.9.3-1.4C18 3.3 16.4 2 13.6 2H7.8c-.5 0-.9.4-1 .9L4 20.1c0 .5.3.9.8.9H7z"/></svg>
+        <span><b>Paiement en plusieurs fois</b> disponible via PayPal</span>
+      </div>
       <p class="pr-note">Paiement sécurisé<br/>Questionnaire envoyé dans la foulée</p>
     </div>
   </div>
@@ -692,8 +712,11 @@ form.off{display:none}
   function up(){
     var h=document.documentElement.scrollHeight-window.innerHeight;
     bar.style.width=(h>0?Math.min(window.scrollY/h,1)*100:0)+'%';
-    var r=offre.getBoundingClientRect();
-    var surOffre = r.top < window.innerHeight*.92 && r.bottom > 0;
+    var surOffre=false;
+    if(offre){
+      var r=offre.getBoundingClientRect();
+      surOffre = r.top < window.innerHeight*.92 && r.bottom > 0;
+    }
     sticky.classList.toggle('show', window.scrollY>620 && !surOffre);
   }
   window.addEventListener('scroll',up,{passive:true});window.addEventListener('resize',up);up();
