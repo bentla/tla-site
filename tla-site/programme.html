@@ -322,6 +322,48 @@ form.off{display:none}
 /* galerie : 4 colonnes sur grand ecran */
 @media(min-width:861px){.ba{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:621px) and (max-width:860px){.ba{grid-template-columns:repeat(3,1fr)}}
+
+/* ---------- navigation de galerie : fleches + points ---------- */
+.ba-nav{display:none;align-items:center;justify-content:center;gap:16px;margin-top:18px;padding:0 20px}
+@media(max-width:620px){.ba-nav{display:flex}}
+.nav-arrow{width:44px;height:44px;flex:none;border-radius:50%;border:1px solid var(--glass-br);
+  background:rgba(255,255,255,.05);color:var(--cream);cursor:pointer;
+  display:grid;place-items:center;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .2s var(--ease),border-color .25s,background .25s,opacity .25s}
+.nav-arrow:hover{border-color:var(--violet-br);background:rgba(91,52,230,.16);transform:scale(1.06)}
+.nav-arrow:active{transform:scale(.94)}
+.nav-arrow[disabled]{opacity:.28;cursor:default;transform:none}
+.nav-arrow svg{width:17px;height:17px;stroke:currentColor;stroke-width:2.4;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.ba-dots{margin-top:0}
+
+/* ---------- temoignages video ---------- */
+#temoignages[hidden]{display:none}
+.vt{display:grid;gap:16px;max-width:1120px;margin:0 auto;padding:0 20px}
+@media(min-width:760px){.vt{grid-template-columns:repeat(2,1fr);max-width:820px}}
+@media(max-width:620px){
+  .vt{display:flex;padding:0 20px 4px;
+    overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y pinch-zoom;
+    scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;-ms-overflow-style:none}
+  .vt::-webkit-scrollbar{display:none}
+  .vt figure{flex:0 0 78%;scroll-snap-align:center}
+}
+.vt figure{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line-v);
+  background:#0b0712;box-shadow:0 24px 60px -28px rgba(91,52,230,.7)}
+.vt video{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;background:#0b0712}
+.vt .play{position:absolute;inset:0;margin:auto;width:62px;height:62px;border-radius:50%;border:0;cursor:pointer;
+  display:grid;place-items:center;color:#fff;background:rgba(91,52,230,.88);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  box-shadow:0 10px 34px -6px rgba(91,52,230,.9);transition:transform .25s var(--ease),opacity .25s}
+.vt .play:hover{transform:scale(1.09)}
+.vt figure.playing .play{opacity:0;pointer-events:none}
+.vt figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 14px;
+  background:linear-gradient(transparent,rgba(6,5,7,.94));pointer-events:none}
+.vt .nm{font-weight:700;font-size:15px;color:#fff;letter-spacing:-.3px}
+.vt .rs{font-family:'Space Mono';font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet-br);margin-top:3px}
+.vt-nav{display:none;align-items:center;justify-content:center;gap:16px;margin-top:18px}
+@media(max-width:620px){.vt-nav{display:flex}}
 </style>
 </head>
 <body>
@@ -360,7 +402,7 @@ form.off{display:none}
       <div class="produit">
         <img src="https://static.wixstatic.com/media/348faf_c08702f67b7948108154f5870bfe6f75~mv2.png" alt="Programme sport et nutrition TLA 360"/>
       </div>
-      <span class="hero-badge">179 € · paiement unique</span>
+      <span class="hero-badge">Sur mesure · 8 semaines</span>
     </div>
 
   </div>
@@ -387,7 +429,13 @@ form.off{display:none}
     <figure><img src="https://static.wixstatic.com/media/348faf_30568273ef2d489b9869bf79b46b2354~mv2.jpg" alt="Transformation physique avant et après" loading="lazy"/><figcaption>Avant / après</figcaption></figure>
     <figure><img src="https://static.wixstatic.com/media/348faf_34f831f83a014c97b2d941c6923a6340~mv2.jpg" alt="Transformation physique avant après" loading="lazy"/><figcaption>Avant / après</figcaption></figure>
   </div>
-  <div class="ba-dots reveal d1" id="baDots" aria-label="Navigation des transformations"></div>
+  <div class="ba-nav reveal d1">
+    <button class="nav-arrow" id="baPrev" aria-label="Transformation précédente">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="ba-dots" id="baDots" style="display:flex" aria-label="Navigation des transformations"></div>
+    <button class="nav-arrow" id="baNext" aria-label="Transformation suivante">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+  </div>
   <div class="ba-hint reveal d1">Fais glisser →</div>
 
   <div class="center reveal d2">
@@ -459,6 +507,44 @@ form.off{display:none}
       <p>Tu m'envoies tes vidéos, je corrige ton exécution.
       Tu arrêtes de te demander si tu fais bien.</p>
     </article>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- ================= TEMOIGNAGES VIDEO =================
+     La section reste masquee tant que les fichiers ne sont pas en ligne :
+     elle s'affiche automatiquement des que les .mp4 sont deposes dans le repo. -->
+<section class="block" id="temoignages" hidden>
+  <div class="shead reveal">
+    <div class="eyebrow">Ils en parlent</div>
+    <h2 class="title">Écoute-les<br/><span class="accent">le dire eux-mêmes</span></h2>
+  </div>
+  <div class="vt" id="vtTrack">
+    <figure>
+      <video preload="metadata" playsinline loop poster="https://static.wixstatic.com/media/348faf_9e2484661dc940ce8c1481fbc49ccb0d~mv2.png">
+        <source src="temoignage-client-1.mp4" type="video/mp4"/>
+      </video>
+      <button class="play" aria-label="Lire le témoignage">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+      </button>
+      <figcaption><div class="nm">Témoignage client</div><div class="rs">Programme TLA 360</div></figcaption>
+    </figure>
+    <figure>
+      <video preload="metadata" playsinline loop poster="https://static.wixstatic.com/media/348faf_f7db69ee80c6441cb707bc21c9577e16~mv2.png">
+        <source src="temoignage-client-2.mp4" type="video/mp4"/>
+      </video>
+      <button class="play" aria-label="Lire le témoignage">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+      </button>
+      <figcaption><div class="nm">Témoignage client</div><div class="rs">Programme en ligne</div></figcaption>
+    </figure>
+  </div>
+  <div class="vt-nav reveal d1">
+    <button class="nav-arrow" id="vtPrev" aria-label="Témoignage précédent">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button class="nav-arrow" id="vtNext" aria-label="Témoignage suivant">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
@@ -637,6 +723,72 @@ form.off{display:none}
     if(raf) cancelAnimationFrame(raf); raf=requestAnimationFrame(maj);
   },{passive:true});
   maj();
+})();
+
+
+/* fleches de la galerie photo */
+(function(){
+  var track=document.getElementById('baTrack'),
+      prev=document.getElementById('baPrev'), next=document.getElementById('baNext');
+  if(!track||!prev||!next) return;
+  function pas(sens){
+    var s=track.children[0];
+    if(!s) return;
+    var largeur = s.getBoundingClientRect().width + 12;
+    track.scrollBy({left: sens*largeur, behavior:'smooth'});
+  }
+  prev.addEventListener('click',function(){pas(-1);});
+  next.addEventListener('click',function(){pas(1);});
+  function etat(){
+    prev.disabled = track.scrollLeft < 8;
+    next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+  }
+  track.addEventListener('scroll',etat,{passive:true});
+  window.addEventListener('resize',etat); etat();
+})();
+
+/* temoignages video : lecture + fleches + affichage conditionnel */
+(function(){
+  var sec=document.getElementById('temoignages'), track=document.getElementById('vtTrack');
+  if(!sec||!track) return;
+  var figures=[].slice.call(track.children);
+  var videos=figures.map(function(f){return f.querySelector('video');});
+
+  // on n'affiche la section que si au moins une video est reellement disponible
+  var restantes=videos.length, dispo=0;
+  videos.forEach(function(v,i){
+    v.addEventListener('loadedmetadata',function(){dispo++;verdict();});
+    v.addEventListener('error',function(){figures[i].style.display='none';verdict();});
+    setTimeout(verdict, 4000);
+  });
+  var rendu=false;
+  function verdict(){
+    if(rendu) return;
+    if(dispo>0){ rendu=true; sec.hidden=false;
+      document.querySelectorAll('#temoignages .reveal').forEach(function(e){e.classList.add('in');}); }
+  }
+
+  figures.forEach(function(f){
+    var v=f.querySelector('video'), b=f.querySelector('.play');
+    if(!v||!b) return;
+    b.addEventListener('click',function(){
+      videos.forEach(function(o){ if(o!==v){o.pause();} });
+      figures.forEach(function(o){ if(o!==f) o.classList.remove('playing'); });
+      v.setAttribute('controls','');
+      f.classList.add('playing');
+      var p=v.play(); if(p&&p.catch) p.catch(function(){});
+    });
+    v.addEventListener('pause',function(){f.classList.remove('playing');});
+    v.addEventListener('ended',function(){f.classList.remove('playing');});
+  });
+
+  var prev=document.getElementById('vtPrev'), next=document.getElementById('vtNext');
+  function pas(sens){
+    var s=track.children[0]; if(!s) return;
+    track.scrollBy({left: sens*(s.getBoundingClientRect().width+16), behavior:'smooth'});
+  }
+  if(prev) prev.addEventListener('click',function(){pas(-1);});
+  if(next) next.addEventListener('click',function(){pas(1);});
 })();
 
 /* FAQ */
