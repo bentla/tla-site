@@ -407,6 +407,48 @@ form.off{display:none}
 .vt{grid-template-columns:1fr !important;max-width:330px !important;display:grid !important;
   overflow:visible !important;padding:0 20px !important}
 .vt figure{flex:none !important}
+
+/* =========================================================
+   MOBILE : tout ramene a l'echelle d'un ecran de telephone
+   ========================================================= */
+@media(max-width:620px){
+  /* les resultats defilent au doigt, comme les avant/apres */
+  .res{display:flex;gap:12px;padding:0 20px 4px;
+    overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;touch-action:pan-y pinch-zoom;
+    scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none;-ms-overflow-style:none}
+  .res::-webkit-scrollbar{display:none}
+  .res-card{flex:0 0 68%;scroll-snap-align:center}
+  .res-card .ph{aspect-ratio:3/4}
+
+  /* titres et chiffres : on descend d'un cran */
+  .hero h1{font-size:clamp(29px,8.6vw,40px);letter-spacing:-1.1px;margin:12px 0 14px}
+  .hero .hsub{font-size:15px;margin-bottom:18px}
+  .hero-points li{font-size:14px}
+  .hero-points{gap:8px;margin-bottom:20px}
+  h2.title{font-size:clamp(23px,6.6vw,30px);letter-spacing:-.6px}
+  .shead{margin-bottom:22px}
+  .shead .sub{font-size:14.5px}
+  .proof-head .n{font-size:clamp(28px,8.4vw,38px)}
+  .proof-head .l{font-size:9px}
+  .pr-amt{font-size:clamp(34px,10vw,40px)}
+  .pr-amt span{font-size:15px}
+
+  /* respiration : on resserre les sections */
+  section.block{padding:38px 0}
+  .proof{padding:34px 0}
+  .mod{padding:20px 18px}
+  .mod h3{font-size:16px}
+  .mod p{font-size:14px}
+  .step{padding:18px 18px;gap:14px}
+  .coach-in{padding:20px}
+  .pr-card{padding:26px 22px}
+  .pain div{padding:14px 15px;font-size:14.5px}
+  .faq-q{font-size:14px;padding:14px 16px}
+
+  /* visuel du hero : moins encombrant */
+  .hero-visual{min-height:0;padding:26px 16px}
+  .produit{width:min(52vw,180px)}
+}
 </style>
 </head>
 <body>
@@ -449,7 +491,7 @@ form.off{display:none}
     <div class="hero-visual reveal in">
       <img class="bg" src="https://static.wixstatic.com/media/348faf_b8667beb263b4154b3a16050bdba76bc~mv2.png" alt=""/>
       <div class="produit">
-        <img src="https://static.wixstatic.com/media/348faf_c08702f67b7948108154f5870bfe6f75~mv2.png" alt="Programme sport et nutrition TLA 360"/>
+        <img src="tla360-couverture.jpg" alt="TLA 360 — programme sport et nutrition sur mesure"/>
       </div>
       <span class="hero-badge">Sur mesure · 8 semaines</span>
     </div>
@@ -590,7 +632,7 @@ form.off{display:none}
     <div class="eyebrow">Ils l'ont fait</div>
     <h2 class="title">Des gens<br/><span class="accent">comme toi</span></h2>
   </div>
-  <div class="res">
+  <div class="res" id="resTrack">
     <article class="res-card glass reveal d1">
       <div class="ph"><img src="https://static.wixstatic.com/media/348faf_9e2484661dc940ce8c1481fbc49ccb0d~mv2.png" alt="Nicolas, élève du programme TLA 360" loading="lazy"/></div>
       <div class="info"><div class="nm">Nicolas</div><div class="rs">− 12 kg</div></div>
@@ -603,6 +645,13 @@ form.off{display:none}
       <div class="ph"><img src="https://static.wixstatic.com/media/348faf_e31bb009aebd45119003092f22b4c25f~mv2.png" alt="Élève du programme TLA 360" loading="lazy"/></div>
       <div class="info"><div class="nm">Client TLA</div><div class="rs">Transformation 8 semaines</div></div>
     </article>
+  </div>
+  <div class="ba-nav reveal d1">
+    <button class="nav-arrow" id="resPrev" aria-label="Résultat précédent">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="ba-dots" id="resDots" style="display:flex" aria-label="Navigation des résultats"></div>
+    <button class="nav-arrow" id="resNext" aria-label="Résultat suivant">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
@@ -830,6 +879,44 @@ form.off{display:none}
   }
   if(prev) prev.addEventListener('click',function(){pas(-1);});
   if(next) next.addEventListener('click',function(){pas(1);});
+})();
+
+
+/* slider des resultats (mobile) */
+(function(){
+  var track=document.getElementById('resTrack'), dots=document.getElementById('resDots'),
+      prev=document.getElementById('resPrev'), next=document.getElementById('resNext');
+  if(!track||!dots) return;
+  var slides=[].slice.call(track.children);
+  slides.forEach(function(_,i){
+    var d=document.createElement('span');
+    if(i===0) d.className='on';
+    d.addEventListener('click',function(){
+      slides[i].scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+    });
+    dots.appendChild(d);
+  });
+  var pts=[].slice.call(dots.children), raf;
+  function maj(){
+    var c=track.scrollLeft+track.clientWidth/2, best=0, bd=1e9;
+    slides.forEach(function(s,i){
+      var pc=s.offsetLeft-track.offsetLeft+s.clientWidth/2, dd=Math.abs(pc-c);
+      if(dd<bd){bd=dd;best=i;}
+    });
+    pts.forEach(function(p,i){p.classList.toggle('on',i===best);});
+    if(prev) prev.disabled = track.scrollLeft < 8;
+    if(next) next.disabled = track.scrollLeft > track.scrollWidth - track.clientWidth - 8;
+  }
+  function pas(sens){
+    var s=track.children[0]; if(!s) return;
+    track.scrollBy({left:sens*(s.getBoundingClientRect().width+12),behavior:'smooth'});
+  }
+  if(prev) prev.addEventListener('click',function(){pas(-1);});
+  if(next) next.addEventListener('click',function(){pas(1);});
+  track.addEventListener('scroll',function(){
+    if(raf) cancelAnimationFrame(raf); raf=requestAnimationFrame(maj);
+  },{passive:true});
+  window.addEventListener('resize',maj); maj();
 })();
 
 /* FAQ */
