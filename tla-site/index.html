@@ -914,6 +914,86 @@ section.block{padding:46px 0;position:relative}
 .hero .a4{animation-delay:.4s}.hero .a5{animation-delay:.52s}.hero .a6{animation-delay:.62s}
 .hero .a7{animation-delay:.72s}.hero .a8{animation-delay:.82s}.hero .a9{animation-delay:.92s}
 @media(prefers-reduced-motion:reduce){.hero .anim{opacity:1;animation:none}}
+
+/* =========================================================
+   ORDINATEUR (>= 1000 px)
+   Le site est concu mobile-first : sur grand ecran tout restait
+   enferme dans une colonne etroite. On rend aux blocs leur largeur.
+   Aucun impact sous 1000 px : mobile et tablette sont inchanges.
+   ========================================================= */
+@media(min-width:1000px){
+  .wrap{max-width:1240px}
+  section.block{padding:92px 0}
+  .sep{max-width:1240px}
+
+  /* ---- HERO : la scene occupe la largeur, le titre respire ---- */
+  .hero{padding:44px 0 56px}
+  .hero-stage{max-width:1160px;min-height:640px;margin-bottom:40px;border-radius:32px}
+  .hero-stage-content{padding:0 58px 54px;max-width:900px}
+  .hero-stage h1{font-size:clamp(46px,4.4vw,66px);letter-spacing:-2.2px;line-height:1.02}
+  .hero-stage .hs-sub{font-size:16.5px;max-width:660px;margin-top:18px}
+  .hero-counter{max-width:660px;gap:30px;margin-bottom:38px}
+  .hc-num{font-size:60px}
+  .hc-label{font-size:11px}
+  .hc-sub{font-size:21px;max-width:270px}
+  .hero .promise{max-width:740px;font-size:18px}
+  .hero .hook{max-width:660px;font-size:24px}
+  .trophies{max-width:780px;grid-template-columns:1fr 1fr;gap:14px}
+  .trophy .tx{font-size:15px}
+  .coach-card{max-width:560px}
+  .coach-flip{max-width:560px}
+  .marquee-track{gap:26px}
+  .cred{font-size:12.5px}
+
+  /* ---- en-tetes de section ---- */
+  .shead{max-width:840px;margin-bottom:42px}
+  h2.title{font-size:clamp(38px,3.8vw,54px)}
+  .shead .sub{font-size:17.5px}
+
+  /* ---- presentation du coach ---- */
+  .coach{max-width:1080px;gap:56px}
+  .coach-photo{max-width:340px}
+  .coach h2{font-size:clamp(38px,3.4vw,50px)}
+  .coach p{font-size:16.5px}
+  .tag{font-size:11px;padding:8px 16px}
+
+  /* ---- tous les autres blocs ---- */
+  .lib-hover{max-width:1160px}
+  .prob{max-width:1160px}
+  .recog{max-width:840px}
+  .stagne-grid{max-width:1100px}
+  .stagne-frame .shead{max-width:840px}
+  .stagne-cta{max-width:900px}
+  .recv{max-width:1100px}
+  .mod-list{max-width:840px}
+  .pain-intro{max-width:840px;font-size:18.5px}
+  .pain-hits{max-width:780px}
+  .pain-punch{max-width:760px}
+  .pain-after{max-width:840px;font-size:17.5px}
+  .pain-final{max-width:840px;font-size:20px}
+  .timeline{max-width:720px}
+  .diag-card{max-width:880px;padding:56px 46px}
+  .diag-card .p{max-width:700px;font-size:17.5px}
+  .mission{max-width:860px;font-size:17.5px}
+  .solution-key{max-width:840px}
+  .video-mockup{max-width:420px}
+  .comparison{max-width:880px}
+  .lifetime{max-width:1080px}
+  .tgrid{max-width:1080px}
+  .bonus{max-width:1020px}
+  .testi-head{max-width:1100px}
+  .vtesti{max-width:1160px}
+  .testi-video{max-width:880px}
+  .dm-grid{max-width:1020px}
+  .ig-carousel{max-width:1080px}
+  .value-stack{max-width:740px;padding:38px 34px}
+  .price-now{max-width:700px}
+  .pricing{max-width:560px}
+  .faq-list{max-width:880px}
+  .faq-q{font-size:16px;padding:18px 22px}
+  .faq-a{font-size:14px}
+  .final-cta p{max-width:740px;font-size:18px}
+}
 </style>
 <!-- GA4 + Google Consent Mode v2 : analytics refuse par defaut, charge uniquement apres consentement -->
 <script>
