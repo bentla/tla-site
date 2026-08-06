@@ -391,6 +391,17 @@ form.off{display:none}
   .sticky .btn{padding:13px 18px;font-size:14.5px}
   .nav-cta{font-size:12.5px;padding:8px 15px}
 }
+
+/* ---------- prix : meme construction que la page d'accueil ---------- */
+.pr-price{margin-bottom:2px}
+.pr-amt{font-family:'Archivo';font-weight:800;font-size:clamp(40px,11vw,48px);line-height:1;color:#fff;letter-spacing:-2px}
+.pr-amt span{font-family:'Archivo';font-size:18px;font-weight:600;color:rgba(242,239,233,.55);letter-spacing:0;margin-left:5px}
+.pr-pricesub{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:rgba(242,239,233,.8)}
+.pr-paychips{display:inline-flex;align-items:center;gap:6px}
+.pay-chip{font-family:'Archivo';font-weight:800;font-size:11px;padding:3px 8px;border-radius:6px;line-height:1.5}
+.pay-pp{background:#fff;color:#003087}
+.pr-alt2{margin-top:7px;font-size:12px;color:var(--muted)}
+.pr-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);margin:22px 0}
 </style>
 </head>
 <body>
@@ -645,8 +656,12 @@ form.off{display:none}
         <span class="pr-plan">TLA 360 · 8 semaines</span>
         <span class="pr-badge">Populaire</span>
       </div>
-      <div class="pr-price"><span class="v">179</span><span class="u">€ · paiement unique</span></div>
-      <p class="pr-sub">Programme sport et nutrition sur mesure, avec mon suivi.</p>
+      <div class="pr-price">
+        <div class="pr-amt">59,67€<span>/mois</span></div>
+        <div class="pr-pricesub">3× sans frais, pendant 3 mois<span class="pr-paychips"><span class="pay-chip pay-pp">Pay<span style="color:#009cde">Pal</span></span></span></div>
+        <div class="pr-alt2">ou 179€ en une seule fois</div>
+      </div>
+      <div class="pr-div"></div>
       <ul class="pr-list">
         <li><span class="ck">✓</span> Ton programme d'entraînement personnalisé</li>
         <li><span class="ck">✓</span> Ta nutrition adaptée à ton objectif</li>
@@ -655,10 +670,6 @@ form.off{display:none}
         <li><span class="ck">✓</span> Accès immédiat dès le paiement</li>
       </ul>
       <a class="btn btn-p btn-lg" href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" data-cta="offre">Je commence maintenant →</a>
-      <div class="pr-paypal">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 21h3l1-5h3.5c3 0 5-1.8 5.5-4.7.3-2-.6-3.4-2.4-3.9.2-.4.3-.9.3-1.4C18 3.3 16.4 2 13.6 2H7.8c-.5 0-.9.4-1 .9L4 20.1c0 .5.3.9.8.9H7z"/></svg>
-        <span><b>Paiement en plusieurs fois</b> disponible via PayPal</span>
-      </div>
       <p class="pr-note">Paiement sécurisé<br/>Questionnaire envoyé dans la foulée</p>
     </div>
   </div>
@@ -686,7 +697,7 @@ form.off{display:none}
     <h2>Dans 8 semaines,<span class="v">tu auras changé.</span></h2>
     <p>Ou tu seras exactement au même endroit qu'aujourd'hui. La différence, c'est d'avoir
     un plan fait pour toi et quelqu'un qui regarde.</p>
-    <a href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" class="btn btn-p btn-lg" data-cta="final">Je rejoins TLA 360 · 179 € →</a>
+    <a href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" class="btn btn-p btn-lg" data-cta="final">Je rejoins TLA 360 →</a>
     <div class="trust">
       <span>Paiement sécurisé</span><span>Accès immédiat</span><span>Suivi inclus</span>
     </div>
@@ -703,7 +714,7 @@ form.off{display:none}
 </div>
 
 <div class="sticky" id="sticky">
-  <a href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" class="btn btn-p" data-cta="sticky">Je rejoins TLA 360 · 179 € →</a>
+  <a href="https://www.trainlikeathlete.fr/product-page/programme-sport-nutrition-tla-360-8-semaines" class="btn btn-p" data-cta="sticky">Je rejoins TLA 360 →</a>
 </div>
 <script>
 /* progression + barre collante */
