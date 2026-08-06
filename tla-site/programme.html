@@ -402,6 +402,11 @@ form.off{display:none}
 .pay-pp{background:#fff;color:#003087}
 .pr-alt2{margin-top:7px;font-size:12px;color:var(--muted)}
 .pr-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);margin:22px 0}
+
+/* un seul temoignage : on le centre au lieu de l'etaler */
+.vt{grid-template-columns:1fr !important;max-width:330px !important;display:grid !important;
+  overflow:visible !important;padding:0 20px !important}
+.vt figure{flex:none !important}
 </style>
 </head>
 <body>
@@ -562,7 +567,7 @@ form.off{display:none}
 <section class="block" id="temoignages" hidden>
   <div class="shead reveal">
     <div class="eyebrow">Ils en parlent</div>
-    <h2 class="title">Écoute-les<br/><span class="accent">le dire eux-mêmes</span></h2>
+    <h2 class="title">Écoute-le<br/><span class="accent">le dire lui-même</span></h2>
   </div>
   <div class="vt" id="vtTrack">
     <figure>
@@ -574,21 +579,6 @@ form.off{display:none}
       </button>
       <figcaption><div class="nm">Témoignage client</div><div class="rs">Musculation au poids du corps</div></figcaption>
     </figure>
-    <figure>
-      <video preload="metadata" playsinline loop poster="temoignage-poster-2.jpg">
-        <source src="temoignage-client-2.mp4" type="video/mp4"/>
-      </video>
-      <button class="play" aria-label="Lire le témoignage">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
-      </button>
-      <figcaption><div class="nm">Témoignage client</div><div class="rs">Programme en ligne TLA</div></figcaption>
-    </figure>
-  </div>
-  <div class="vt-nav reveal d1">
-    <button class="nav-arrow" id="vtPrev" aria-label="Témoignage précédent">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-    <button class="nav-arrow" id="vtNext" aria-label="Témoignage suivant">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
   </div>
 </section>
 
