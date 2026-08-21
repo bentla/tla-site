@@ -738,12 +738,24 @@ section.block{padding:46px 0;position:relative}
 .pr-price{margin-bottom:2px}
 .pr-amt{font-family:'Archivo';font-weight:800;font-size:clamp(40px,11vw,48px);line-height:1;color:#fff;letter-spacing:-2px}
 .pr-amt span{font-family:'Archivo';font-size:18px;font-weight:600;color:rgba(242,239,233,.55);letter-spacing:0;margin-left:5px}
+.pr-amt .pr-old{font-size:.58em;font-weight:800;color:var(--muted);letter-spacing:-1px;text-decoration:line-through;text-decoration-color:var(--error-br);margin-right:14px}
 .pr-pricesub{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:13px;color:rgba(242,239,233,.8)}
 .pr-paychips{display:inline-flex;align-items:center;gap:6px}
 .pay-chip{font-family:'Archivo';font-weight:800;font-size:11px;padding:3px 8px;border-radius:6px;line-height:1.5}
 .pay-pp{background:#fff;color:#003087}
 .pay-kl{background:#ffb3c7;color:#0a0a0a}
 .pr-alt2{margin-top:7px;font-size:12px;color:var(--muted)}
+.pr-promo{display:inline-flex;align-items:center;gap:8px;margin-bottom:15px;padding:7px 15px;border-radius:100px;
+  background:rgba(196,85,77,.14);border:1px solid rgba(224,114,106,.5);color:var(--error-br);
+  font-family:'Space Mono';font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.pr-promo::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--error-br);
+  animation:pulseDot 1.8s ease-out infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(224,114,106,.55)}70%{box-shadow:0 0 0 7px rgba(224,114,106,0)}100%{box-shadow:0 0 0 0 rgba(224,114,106,0)}}
+.pr-alt2 .pr-was{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--error-br);margin-right:3px}
+.pr-alt2 .pr-now{color:var(--cream);font-weight:800}
+.pr-deadline{margin-top:13px;display:flex;align-items:center;gap:7px;font-family:'Archivo';font-size:12.5px;font-weight:600;color:var(--error-br)}
+.pr-deadline::before{content:"⚠";font-size:13px;flex:none}
+@media(prefers-reduced-motion:reduce){.pr-promo::before{animation:none}}
 .pr-div{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);margin:22px 0}
 .pr-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
 .pr-list li{display:flex;align-items:center;gap:13px;font-family:'Archivo';font-weight:400;font-size:15px;color:var(--cream)}
@@ -1360,9 +1372,10 @@ if(getChoice()==='granted'){window.__tlaConsent.apply('granted',false);}
         <span class="pr-badge">Recommandé</span>
       </div>
       <div class="pr-price">
-        <div class="pr-amt">50€<span>/mois</span></div>
-        <div class="pr-pricesub">3× sans frais, pendant 3 mois<span class="pr-paychips"><span class="pay-chip pay-pp">Pay<span style="color:#009cde">Pal</span></span><span class="pay-chip pay-kl">Klarna</span></span></div>
-        <div class="pr-alt2">ou 150€ en une seule fois</div>
+        <div class="pr-promo">Offre −47€ · jusqu'au 31 août</div>
+        <div class="pr-amt"><s class="pr-old">197€</s>150€</div>
+        <div class="pr-pricesub">ou 3× 50€/mois, sans frais<span class="pr-paychips"><span class="pay-chip pay-pp">Pay<span style="color:#009cde">Pal</span></span><span class="pay-chip pay-kl">Klarna</span></span></div>
+        <div class="pr-deadline">Le 31 août, la Méthode TLA repasse à 197€.</div>
       </div>
       <div class="pr-div"></div>
       <ul class="pr-list">
